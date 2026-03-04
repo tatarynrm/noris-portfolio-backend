@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model translation {
+  translation_id String   @id @default(uuid())
+  locale         String
+  key            String
+  value          String
+  namespace      String?
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+
+  @@unique([locale, key])
+  @@index([locale])
+  @@index([key])
+}
+
+model user {
+  user_id                String    @id @default(uuid())
+  email                  String    @unique
+  password               String?
+  name                   String?
+  role                   UserRole  @default(user)
+  picture                String?
+  google_id              String?   @unique
+  password_reset_token   String?   @unique
+  password_reset_expires DateTime?
+  created_at             DateTime  @default(now())
+  updated_at             DateTime  @updatedAt
+}
+
+model admin_menu {
+  menu_id    String   @id @default(uuid())
+  title      String   @unique
+  link       String
+  icon       String?
+  sequence   Int      @default(0)
+  is_active  Boolean  @default(true)
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+}
+
+model tender {
+  tender_id   String   @id @default(uuid())
+  title       String
+  description String?
+  created_at  DateTime @default(now())
+  updated_at  DateTime @updatedAt
+}
+
+model contact_message {
+  message_id      String   @id @default(uuid())
+  name            String
+  email           String
+  phone           String
+  interest        String
+  dynamic_field   String?
+  project_details String   @db.Text
+  status          String   @default("new")
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+}
+
+enum UserRole {
+  user
+  admin
+}
