@@ -18,7 +18,7 @@ async function bootstrap() {
 
   // Required for external frontend connectivity
   app.enableCors({
-    origin: true, // Reflects the request origin in the Access-Control-Allow-Origin header
+    origin: ['https://noriscompany.site', 'http://localhost:3000', 'http://localhost:5005', 'http://localhost:3001', 'http://localhost:8081'],// Reflects the request origin in the Access-Control-Allow-Origin header
     methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
     credentials: true,
     allowedHeaders: ['Content-Type', 'Accept', 'Authorization', 'X-Requested-With'],
