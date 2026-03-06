@@ -30,6 +30,9 @@ let TranslationsController = class TranslationsController {
     async upsert(data) {
         return this.translationsService.upsertTranslation(data.locale, data.key, data.value, data.namespace);
     }
+    async upsertBulk(data) {
+        return this.translationsService.upsertBulk(data.translations);
+    }
 };
 exports.TranslationsController = TranslationsController;
 __decorate([
@@ -48,6 +51,15 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], TranslationsController.prototype, "upsert", null);
+__decorate([
+    (0, common_1.Post)('upsert-bulk'),
+    (0, common_1.UseGuards)(jwt_auth_guard_1.JwtAuthGuard, roles_guard_1.RolesGuard),
+    (0, roles_decorator_1.Roles)(client_1.UserRole.admin),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], TranslationsController.prototype, "upsertBulk", null);
 exports.TranslationsController = TranslationsController = __decorate([
     (0, common_1.Controller)('translations'),
     __metadata("design:paramtypes", [translations_service_1.TranslationsService])

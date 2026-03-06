@@ -46,6 +46,13 @@ let TranslationsService = class TranslationsService {
             create: { locale, key, value, namespace },
         });
     }
+    async upsertBulk(translations) {
+        return this.prisma.$transaction(translations.map((t) => this.prisma.translation.upsert({
+            where: { locale_key: { locale: t.locale, key: t.key } },
+            update: { value: t.value, namespace: t.namespace },
+            create: { locale: t.locale, key: t.key, value: t.value, namespace: t.namespace },
+        })));
+    }
 };
 exports.TranslationsService = TranslationsService;
 exports.TranslationsService = TranslationsService = __decorate([

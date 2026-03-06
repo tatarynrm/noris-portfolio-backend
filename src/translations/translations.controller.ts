@@ -20,4 +20,11 @@ export class TranslationsController {
   async upsert(@Body() data: { locale: string; key: string; value: string; namespace?: string }) {
     return this.translationsService.upsertTranslation(data.locale, data.key, data.value, data.namespace);
   }
+
+  @Post('upsert-bulk')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles(UserRole.admin)
+  async upsertBulk(@Body() data: { translations: { locale: string; key: string; value: string; namespace?: string }[] }) {
+    return this.translationsService.upsertBulk(data.translations);
+  }
 }

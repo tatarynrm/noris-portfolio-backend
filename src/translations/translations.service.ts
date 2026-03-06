@@ -3,7 +3,7 @@ import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class TranslationsService {
-  constructor(private prisma: PrismaService) {}
+  constructor(private prisma: PrismaService) { }
 
   async getMessages(locale: string) {
     const translations = await this.prisma.translation.findMany({
@@ -40,5 +40,17 @@ export class TranslationsService {
       update: { value, namespace },
       create: { locale, key, value, namespace },
     });
+  }
+
+  async upsertBulk(translations: { locale: string; key: string; value: string; namespace?: string }[]) {
+    return this.prisma.$transaction(
+      translations.map((t) =>
+        this.prisma.translation.upsert({
+          where: { locale_key: { locale: t.locale, key: t.key } },
+          update: { value: t.value, namespace: t.namespace },
+          create: { locale: t.locale, key: t.key, value: t.value, namespace: t.namespace },
+        }),
+      ),
+    );
   }
 }
