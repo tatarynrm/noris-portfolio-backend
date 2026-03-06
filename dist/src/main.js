@@ -14,7 +14,7 @@ async function bootstrap() {
     const documentFactory = () => swagger_1.SwaggerModule.createDocument(app, config);
     swagger_1.SwaggerModule.setup('api', app, documentFactory);
     app.enableCors({
-        origin: true,
+        origin: ['https://noriscompany.site', 'http://localhost:3000', 'http://localhost:5005', 'http://localhost:3001', 'http://localhost:8081'],
         methods: 'GET,HEAD,PUT,PATCH,POST,DELETE,OPTIONS',
         credentials: true,
         allowedHeaders: ['Content-Type', 'Accept', 'Authorization', 'X-Requested-With'],

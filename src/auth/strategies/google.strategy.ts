@@ -22,6 +22,7 @@ export class GoogleStrategy extends PassportStrategy(Strategy, 'google') {
     done: VerifyCallback,
   ): Promise<any> {
     try {
+      console.log(profile, 'profile 25 line');
       const user = await this.usersService.findOrCreate({
         id: profile.id,
         emails: profile.emails || [],

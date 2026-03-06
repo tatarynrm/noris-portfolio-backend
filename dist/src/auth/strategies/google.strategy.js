@@ -27,6 +27,7 @@ let GoogleStrategy = class GoogleStrategy extends (0, passport_1.PassportStrateg
     }
     async validate(accessToken, refreshToken, profile, done) {
         try {
+            console.log(profile, 'profile 25 line');
             const user = await this.usersService.findOrCreate({
                 id: profile.id,
                 emails: profile.emails || [],

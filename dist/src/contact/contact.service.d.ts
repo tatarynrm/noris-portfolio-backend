@@ -12,8 +12,8 @@ export declare class ContactService {
         dynamicField?: string;
         projectDetails: string;
     }): Promise<{
-        name: string;
         email: string;
+        name: string;
         created_at: Date;
         updated_at: Date;
         message_id: string;
