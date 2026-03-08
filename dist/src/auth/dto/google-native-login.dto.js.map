@@ -1,0 +1,1 @@
+{"version":3,"file":"google-native-login.dto.js","sourceRoot":"","sources":["../../../../src/auth/dto/google-native-login.dto.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,qDAAuD;AACvD,6CAA8C;AAE9C,MAAa,oBAAoB;IAO7B,YAAY,CAAS;CACxB;AARD,oDAQC;AADG;IANC,IAAA,qBAAW,EAAC;QACT,WAAW,EAAE,qCAAqC;QAClD,OAAO,EAAE,iBAAiB;KAC7B,CAAC;IACD,IAAA,0BAAQ,GAAE;IACV,IAAA,4BAAU,GAAE;;0DACQ"}

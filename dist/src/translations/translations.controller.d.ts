@@ -9,13 +9,13 @@ export declare class TranslationsController {
         value: string;
         namespace?: string;
     }): Promise<{
+        created_at: Date;
+        updated_at: Date;
         translation_id: string;
         locale: string;
         key: string;
         value: string;
         namespace: string | null;
-        created_at: Date;
-        updated_at: Date;
     }>;
     upsertBulk(data: {
         translations: {
@@ -25,12 +25,12 @@ export declare class TranslationsController {
             namespace?: string;
         }[];
     }): Promise<{
+        created_at: Date;
+        updated_at: Date;
         translation_id: string;
         locale: string;
         key: string;
         value: string;
         namespace: string | null;
-        created_at: Date;
-        updated_at: Date;
     }[]>;
 }

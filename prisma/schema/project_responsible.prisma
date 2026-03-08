@@ -1,0 +1,19 @@
+// =============================================================
+//  PROJECT RESPONSIBLE
+//  Linking users to projects with specific roles
+// =============================================================
+
+model project_responsible {
+  id         String   @id @default(uuid())
+  project_id String
+  user_id    String
+  role       String?  @default("Lead") // Lead, Developer, Designer, etc.
+  
+  project    project  @relation(fields: [project_id], references: [project_id], onDelete: Cascade)
+  user       user     @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
+
+  created_at DateTime @default(now())
+  updated_at DateTime @updatedAt
+
+  @@unique([project_id, user_id])
+}

@@ -1,0 +1,17 @@
+// =============================================================
+//  CONTACT MESSAGE
+//  Inbound enquiries from the public contact form
+// =============================================================
+
+model contact_message {
+  message_id      String   @id @default(uuid())
+  name            String
+  email           String
+  phone           String
+  interest        String
+  dynamic_field   String?
+  project_details String   @db.Text
+  status          String   @default("new")
+  created_at      DateTime @default(now())
+  updated_at      DateTime @updatedAt
+}

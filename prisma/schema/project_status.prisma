@@ -1,0 +1,13 @@
+// =============================================================
+//  PROJECT STATUS
+//  Categorization for project progression (e.g., Planning, In Progress, Completed)
+// =============================================================
+
+model project_status {
+  status_id  String    @id @default(uuid())
+  name       String    @unique
+  color      String?   @default("#3b82f6")
+  projects   project[]
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+}

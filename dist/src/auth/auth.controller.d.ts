@@ -4,6 +4,7 @@ import { LoginDto } from './dto/login.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { GoogleNativeLoginDto } from './dto/google-native-login.dto';
 import { user } from '@prisma/client';
 export declare class AuthController {
     private readonly authService;
@@ -32,6 +33,16 @@ export declare class AuthController {
     googleAuthRedirect(req: {
         user: user;
     }, res: any): any;
+    googleNativeLogin(googleNativeLoginDto: GoogleNativeLoginDto): Promise<{
+        access_token: string;
+        user: {
+            id: string;
+            email: string;
+            name: string | null;
+            picture: string | null;
+            role: import(".prisma/client").$Enums.UserRole;
+        };
+    }>;
     forgotPassword(forgotPasswordDto: ForgotPasswordDto): Promise<{
         message: string;
     }>;

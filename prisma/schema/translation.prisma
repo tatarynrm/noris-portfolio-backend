@@ -1,0 +1,18 @@
+// =============================================================
+//  TRANSLATION
+//  i18n key-value store grouped by locale & namespace
+// =============================================================
+
+model translation {
+  translation_id String   @id @default(uuid())
+  locale         String
+  key            String
+  value          String
+  namespace      String?
+  created_at     DateTime @default(now())
+  updated_at     DateTime @updatedAt
+
+  @@unique([locale, key])
+  @@index([locale])
+  @@index([key])
+}

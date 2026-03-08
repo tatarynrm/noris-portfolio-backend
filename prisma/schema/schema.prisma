@@ -1,0 +1,14 @@
+// =============================================================
+//  DATABASE CONFIGURATION
+//  Generator + Datasource — single source of truth
+// =============================================================
+
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["prismaSchemaFolder"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}

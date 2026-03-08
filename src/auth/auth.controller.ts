@@ -8,6 +8,7 @@ import { LoginDto } from './dto/login.dto';
 import { ForgotPasswordDto } from './dto/forgot-password.dto';
 import { ResetPasswordDto } from './dto/reset-password.dto';
 import { ChangePasswordDto } from './dto/change-password.dto';
+import { GoogleNativeLoginDto } from './dto/google-native-login.dto';
 import { user } from '@prisma/client';
 
 @ApiTags('auth')
@@ -47,6 +48,13 @@ export class AuthController {
     return res.redirect(`${frontendUrl}/auth/callback?token=${access_token}`);
   }
 
+  @Post('google-native')
+  @ApiOperation({ summary: 'Google Native Login' })
+  @ApiResponse({ status: 200, description: 'Return JWT Token' })
+  googleNativeLogin(@Body() googleNativeLoginDto: GoogleNativeLoginDto) {
+    return this.authService.googleNativeLogin(googleNativeLoginDto.access_token);
+  }
+
   @Post('forgot-password')
   @ApiOperation({ summary: 'Send password reset link' })
   @ApiResponse({ status: 200, description: 'Return confirmation message' })
@@ -74,6 +82,8 @@ export class AuthController {
   @ApiOperation({ summary: 'Get current user profile' })
   getProfile(@Req() req: any) {
     const { password, ...userWithoutPassword } = req.user;
+    console.log(userWithoutPassword);
+
     return userWithoutPassword;
   }
 }

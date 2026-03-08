@@ -1,0 +1,20 @@
+// =============================================================
+//  USER
+//  Authentication & authorization model
+// =============================================================
+
+model user {
+  user_id                String    @id @default(uuid())
+  email                  String    @unique
+  password               String?
+  name                   String?
+  role                   UserRole  @default(user)
+  picture                String?
+  google_id              String?   @unique
+  password_reset_token   String?   @unique
+  password_reset_expires DateTime?
+  created_at             DateTime  @default(now())
+  updated_at             DateTime  @updatedAt
+
+  projects_responsible     project_responsible[]
+}

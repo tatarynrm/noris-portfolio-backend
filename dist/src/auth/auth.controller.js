@@ -23,6 +23,7 @@ const login_dto_1 = require("./dto/login.dto");
 const forgot_password_dto_1 = require("./dto/forgot-password.dto");
 const reset_password_dto_1 = require("./dto/reset-password.dto");
 const change_password_dto_1 = require("./dto/change-password.dto");
+const google_native_login_dto_1 = require("./dto/google-native-login.dto");
 let AuthController = class AuthController {
     authService;
     constructor(authService) {
@@ -41,6 +42,9 @@ let AuthController = class AuthController {
         const frontendUrl = process.env.FRONTEND_URL || 'http://localhost:3001';
         return res.redirect(`${frontendUrl}/auth/callback?token=${access_token}`);
     }
+    googleNativeLogin(googleNativeLoginDto) {
+        return this.authService.googleNativeLogin(googleNativeLoginDto.access_token);
+    }
     forgotPassword(forgotPasswordDto) {
         return this.authService.forgotPassword(forgotPasswordDto);
     }
@@ -52,6 +56,7 @@ let AuthController = class AuthController {
     }
     getProfile(req) {
         const { password, ...userWithoutPassword } = req.user;
+        console.log(userWithoutPassword);
         return userWithoutPassword;
     }
 };
@@ -94,6 +99,15 @@ __decorate([
     __metadata("design:paramtypes", [Object, Object]),
     __metadata("design:returntype", void 0)
 ], AuthController.prototype, "googleAuthRedirect", null);
+__decorate([
+    (0, common_1.Post)('google-native'),
+    (0, swagger_1.ApiOperation)({ summary: 'Google Native Login' }),
+    (0, swagger_1.ApiResponse)({ status: 200, description: 'Return JWT Token' }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [google_native_login_dto_1.GoogleNativeLoginDto]),
+    __metadata("design:returntype", void 0)
+], AuthController.prototype, "googleNativeLogin", null);
 __decorate([
     (0, common_1.Post)('forgot-password'),
     (0, swagger_1.ApiOperation)({ summary: 'Send password reset link' }),

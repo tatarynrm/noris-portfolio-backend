@@ -9,6 +9,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MailModule } from './mail/mail.module';
 import { AdminModule } from './admin/admin.module';
 import { ContactModule } from './contact/contact.module';
+import { ProjectsModule } from './projects/projects.module';
 
 @Module({
   imports: [
@@ -19,7 +20,8 @@ import { ContactModule } from './contact/contact.module';
     AuthModule,
     MailModule,
     AdminModule,
-    ContactModule
+    ContactModule,
+    ProjectsModule
   ],
   controllers: [AppController],
   providers: [AppService],

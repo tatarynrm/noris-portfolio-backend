@@ -1,0 +1,19 @@
+// =============================================================
+//  TENDER
+//  Public tender / project listings
+// =============================================================
+
+model project {
+  project_id   String   @id @default(uuid())
+  title        String
+  description  String?
+  status_id    String?
+  
+  status       project_status? @relation(fields: [status_id], references: [status_id])
+  members      project_responsible[]
+
+  created_at   DateTime @default(now())
+  updated_at   DateTime @updatedAt
+
+  @@index([project_id])
+}

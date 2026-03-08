@@ -41,6 +41,25 @@ async function main() {
     }
 
     console.log('Admin menu items seeded.');
+
+    // 3. Seed Project Statuses
+    const statuses = [
+        { name: 'Planning', color: '#94a3b8' },
+        { name: 'In Progress', color: '#3b82f6' },
+        { name: 'Completed', color: '#10b981' },
+        { name: 'On Hold', color: '#f59e0b' },
+        { name: 'Cancelled', color: '#ef4444' },
+    ];
+
+    for (const status of statuses) {
+        await prisma.project_status.upsert({
+            where: { name: status.name },
+            update: { color: status.color },
+            create: { ...status },
+        });
+    }
+
+    console.log('Project statuses seeded.');
 }
 
 main()

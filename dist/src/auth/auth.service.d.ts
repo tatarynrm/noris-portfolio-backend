@@ -41,6 +41,16 @@ export declare class AuthService {
     changePassword(userId: string, changePasswordDto: ChangePasswordDto): Promise<{
         message: string;
     }>;
+    googleNativeLogin(accessToken: string): Promise<{
+        access_token: string;
+        user: {
+            id: string;
+            email: string;
+            name: string | null;
+            picture: string | null;
+            role: import(".prisma/client").$Enums.UserRole;
+        };
+    }>;
     generateJwt(userObject: user): {
         access_token: string;
         user: {

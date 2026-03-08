@@ -115,6 +115,27 @@ let AuthService = class AuthService {
         await this.usersService.updatePassword(userId, changePasswordDto.new_password);
         return { message: 'Password successfully changed' };
     }
+    async googleNativeLogin(accessToken) {
+        try {
+            const response = await fetch(`https://www.googleapis.com/oauth2/v3/userinfo?access_token=${accessToken}`);
+            const googleUser = await response.json();
+            if (!googleUser || googleUser.error) {
+                throw new common_1.UnauthorizedException('Invalid Google access token');
+            }
+            const user = await this.usersService.findOrCreate({
+                id: googleUser.sub,
+                emails: [{ value: googleUser.email }],
+                displayName: googleUser.name,
+                photos: [{ value: googleUser.picture }],
+            });
+            return this.generateJwt(user);
+        }
+        catch (error) {
+            if (error instanceof common_1.UnauthorizedException)
+                throw error;
+            throw new common_1.UnauthorizedException('Failed to verify Google token');
+        }
+    }
     generateJwt(userObject) {
         const payload = { sub: userObject.user_id, email: userObject.email, role: userObject.role };
         return {

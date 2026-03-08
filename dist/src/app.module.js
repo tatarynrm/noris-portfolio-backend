@@ -18,6 +18,7 @@ const config_1 = require("@nestjs/config");
 const mail_module_1 = require("./mail/mail.module");
 const admin_module_1 = require("./admin/admin.module");
 const contact_module_1 = require("./contact/contact.module");
+const projects_module_1 = require("./projects/projects.module");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
@@ -31,7 +32,8 @@ exports.AppModule = AppModule = __decorate([
             auth_module_1.AuthModule,
             mail_module_1.MailModule,
             admin_module_1.AdminModule,
-            contact_module_1.ContactModule
+            contact_module_1.ContactModule,
+            projects_module_1.ProjectsModule
         ],
         controllers: [app_controller_1.AppController],
         providers: [app_service_1.AppService],
